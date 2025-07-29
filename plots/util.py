@@ -2,10 +2,7 @@ from collections import Counter
 import requests
 import os
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-import time
+import zipfile
 
 
 def download_relationship_metrics_csv(
@@ -14,13 +11,13 @@ def download_relationship_metrics_csv(
     redownload=False,
 ):
     data_dir = os.path.join(data_dir, simulation_id)
-    csv_path = os.path.join(data_dir, f"{simulation_id}.csv")
+    csv_path = os.path.join(data_dir, f"{simulation_id}-graph-metrics.csv")
+
     if os.path.exists(csv_path) and not redownload:
         print(f"CSV already exists at {csv_path}. Skipping download.")
         return
     url = f"http://localhost:8000/simulation/{simulation_id}/relationship-metrics"
     os.makedirs(data_dir, exist_ok=True)
-    csv_path = os.path.join(data_dir, f"{simulation_id}-graph-metrics.csv")
 
     response = requests.get(url)
     if response.status_code == 200:
@@ -82,46 +79,50 @@ def generate_plot_title(data, num_agents=12, personality="Neutral Personality"):
     title = (
         f"{num_agents} Agents, {width} x {height} Grid, {total_resources} Resources "
     )
-    title += f"({agent_pct[0]}%, {agent_pct[1]}%, {agent_pct[2]}%), {personality}"
+    title += f"({agent_dist[0]}, {agent_dist[1]}, {agent_dist[2]}), {personality}"
 
     return title
 
 
-def download_map(simulation_id):
+def download_map_image(simulation_id, tick, data_dir="../data", redownload=False):
+    data_dir = os.path.join(data_dir, simulation_id)
+    os.makedirs(data_dir, exist_ok=True)
+    img_filename = f"{simulation_id}-map-tick-{tick}.png"
+    img_path = os.path.join(data_dir, img_filename)
+    if os.path.exists(img_path) and not redownload:
+        print(f"Image already exists at {img_path}. Skipping download.")
+        return
+    url = f"http://localhost:3000/maps/{simulation_id}/{img_filename}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(img_path, "wb") as f:
+            f.write(response.content)
+        print(f"Image downloaded and saved to {img_path}")
+    else:
+        print(f"Failed to download image. Status code: {response.status_code}")
 
-    download_dir = os.path.abspath(os.path.join("..", "data", simulation_id))
-    map_path = f"{download_dir}/{simulation_id}-map.png"
-    if os.path.exists(map_path):
-        print(f"Map already exists at {map_path}. Skipping download.")
+
+def download_all_maps(simulation_id, data_dir="../data", redownload=False):
+
+    data_dir = os.path.join(data_dir, simulation_id, "maps")
+    os.makedirs(data_dir, exist_ok=True)
+    zip_filename = f"simulation_{simulation_id}_maps.zip"
+    zip_path = os.path.join(data_dir, zip_filename)
+
+    if os.path.exists(zip_path) and not redownload:
+        print(f"Zip file already exists at {zip_path}. Skipping download.")
         return
 
-    # Setup Chrome options for headless and automatic downloads
-    chrome_options = Options()  # run headless if you want
-    chrome_options.add_argument("--headless")
-    prefs = {"download.default_directory": download_dir}
-    chrome_options.add_experimental_option("prefs", prefs)
+    url = f"http://localhost:3000/api/download-maps?simulationId={simulation_id}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(zip_path, "wb") as f:
+            f.write(response.content)
+        print(f"All maps downloaded and saved to {zip_path}")
 
-    driver = webdriver.Chrome(options=chrome_options)
-
-    try:
-        driver.get(
-            f"http://localhost:3000/simulation/{simulation_id}"
-        )  # Your React app URL
-
-        # Wait for page load
-        time.sleep(2)
-
-        # Find the button by its text or class - adjust selector as needed
-        button = driver.find_element(
-            By.XPATH, "//button[contains(text(), 'Download Map')]"
-        )
-
-        # Click the button
-        button.click()
-
-        # Wait for download or rendering to complete
-        time.sleep(2)
-        print(f"Map downloaded to {map_path}")
-
-    finally:
-        driver.quit()
+        # Extract the zip
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
+            zip_ref.extractall(data_dir)
+        print(f"Maps extracted to {data_dir}")
+    else:
+        print(f"Failed to download all maps. Status code: {response.status_code}")
