@@ -1,0 +1,81 @@
+test_name,simulation_id,ticks,success
+Move (BF1),test-748e12,1,True
+Move (BF1),test-5ec88c,1,True
+Move (BF1),test-654aba,1,True
+Move (BF1),test-9c7884,1,True
+Move (BF1),test-6d512a,1,True
+Move (BF1),test-0736eb,1,True
+Move (BF1),test-ebdef2,1,True
+Move (BF1),test-61ff82,1,True
+Move (BF1),test-40b31b,1,True
+Move (BF1),test-42c2ab,1,True
+Start Conversation (BF2),test-7759b8,1,True
+Start Conversation (BF2),test-09847c,1,True
+Start Conversation (BF2),test-7c6834,1,True
+Start Conversation (BF2),test-543a29,1,True
+Start Conversation (BF2),test-1e1199,1,True
+Start Conversation (BF2),test-b573a0,1,True
+Start Conversation (BF2),test-20a7bd,1,True
+Start Conversation (BF2),test-7a4c61,1,True
+Start Conversation (BF2),test-fdf788,1,True
+Start Conversation (BF2),test-a7b167,1,True
+Accept Conversation (BF3),test-bec7c9,2,True
+Accept Conversation (BF3),test-78daab,2,True
+Accept Conversation (BF3),test-75dee3,2,True
+Accept Conversation (BF3),test-d6288e,2,True
+Accept Conversation (BF3),test-a4e4e7,2,True
+Accept Conversation (BF3),test-d0dcf7,2,True
+Accept Conversation (BF3),test-1abc62,2,True
+Accept Conversation (BF3),test-e9e783,2,True
+Accept Conversation (BF3),test-b71673,2,True
+Accept Conversation (BF3),test-e59e55,2,True
+Decine Conversation (BF4),test-34a5fe,2,True
+Decine Conversation (BF4),test-11823e,2,True
+Decine Conversation (BF4),test-c690ae,2,True
+Decine Conversation (BF4),test-701e0c,2,True
+Decine Conversation (BF4),test-0a0ac5,2,True
+Decine Conversation (BF4),test-9655da,2,True
+Decine Conversation (BF4),test-11e70b,2,True
+Decine Conversation (BF4),test-e4b0f8,2,True
+Decine Conversation (BF4),test-0a530f,2,True
+Decine Conversation (BF4),test-57a693,2,True
+Harvest Resource (BF5),test-ba9d0b,2,True
+Harvest Resource (BF5),test-749bb6,2,True
+Harvest Resource (BF5),test-8f5de1,2,True
+Harvest Resource (BF5),test-18973c,2,True
+Harvest Resource (BF5),test-00f0ee,2,True
+Harvest Resource (BF5),test-ab158e,2,True
+Harvest Resource (BF5),test-234e84,2,True
+Harvest Resource (BF5),test-132b66,2,True
+Harvest Resource (BF5),test-628055,2,True
+Harvest Resource (BF5),test-5314d1,2,True
+Death (BF6),test-death-1132e9,3,True
+Death (BF6),test-death-849233,3,True
+Death (BF6),test-death-af56c1,3,True
+Death (BF6),test-death-d37042,3,True
+Death (BF6),test-death-529427,3,True
+Death (BF6),test-death-d89f0f,3,True
+Death (BF6),test-death-f529cb,3,True
+Death (BF6),test-death-3bb6bb,3,True
+Death (BF6),test-death-8c725d,4,True
+Death (BF6),test-death-20c23b,3,True
+Low Energy (BF7),test-5e1e3c,1,True
+Low Energy (BF7),test-4d6070,1,True
+Low Energy (BF7),test-0c9c4a,1,True
+Low Energy (BF7),test-98bb3f,1,True
+Low Energy (BF7),test-f4ff91,1,True
+Low Energy (BF7),test-67c954,1,True
+Low Energy (BF7),test-563f00,1,True
+Low Energy (BF7),test-08472c,1,True
+Low Energy (BF7),test-cab837,1,True
+Low Energy (BF7),test-249e97,1,True
+High Energy (BF8),test-d06cf4,1,True
+High Energy (BF8),test-9d9473,1,True
+High Energy (BF8),test-b70870,1,True
+High Energy (BF8),test-8db78c,1,True
+High Energy (BF8),test-67467d,1,True
+High Energy (BF8),test-aeff5b,1,True
+High Energy (BF8),test-2f92e2,1,True
+High Energy (BF8),test-98cdc3,1,True
+High Energy (BF8),test-b7dad5,1,True
+High Energy (BF8),test-4e7445,1,True
