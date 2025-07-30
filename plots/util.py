@@ -126,3 +126,13 @@ def download_all_maps(simulation_id, data_dir="../data", redownload=False):
         print(f"Maps extracted to {data_dir}")
     else:
         print(f"Failed to download all maps. Status code: {response.status_code}")
+
+
+def get_action_logs(simulation_id):
+    url = f"http://localhost:8000/simulation/{simulation_id}/action-logs"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Failed to fetch action logs. Status code: {response.status_code}")
+        return None
